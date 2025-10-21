@@ -1,0 +1,37 @@
+# Create a Grid of Zeroes
+def zerogrid(size):
+    grid = [[0] * size for _ in range(size)]
+
+    # Starting Values
+    num = 1
+    row, col = 0, size // 2  # Start in middle top box
+
+    #Algorithm 
+    while num <= size ** 2:         # Stops at last number
+        grid[row][col] = num        # Update Grid
+        num += 1                    # Next Number
+
+        # Move Up & Right
+        next_col, next_row  = (col + 1) % size, (row - 1) % size
+
+        # Down when occupied
+        if grid[next_row][next_col] != 0: # Checks if occupied
+            row += 1                      # Move Down
+        else:
+            row, col = next_row, next_col # Proceed
+    return grid
+
+def output_grid(grid, size):
+    print(f"\nMagic Square of order {size}:")
+    for row in grid:
+        print(" ".join(str(num).rjust(3) for num in row))
+
+# Input size
+size = int(input("Enter the size of the magic square (odd number): "))
+
+# Check if size is odd
+if size % 2 == 0:
+    print("Please enter an odd number.")
+else:
+    grid = zerogrid(size)
+    output_grid(grid, size)
