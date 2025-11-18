@@ -1,0 +1,138 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct Song {
+    string title;
+    string artist;
+    string duration;
+};
+
+const int MAX_SIZE = 10;
+Song playlist[MAX_SIZE] = {
+    {"Susundan", "Cup of Joe", "4:30"},
+    {"Saan", "Maki", "3:45"},
+    {"Sirena", "Gloc-9 ft. Ebe Dancel", "4:50"},
+    {"Pasko Na Sinta Ko", "Sugarcane", "3:58"},
+    {"Huwag Na Huwag Mong Sasabihin", "Kitchie Nadal", "4:28"},
+    {"Tulog Na", "Sugarfree", "3:20"},
+    {"Tatsulok", "Gloc-9", "4:10"}
+};
+int song_count = 7;
+int current_track = 0;
+
+void display_playlist() {
+    cout << "\n--- Current Playlist (" << song_count << " songs) ---\n";
+    for (int i = 0; i < song_count; i++) {
+        cout << i + 1 << ". " << playlist[i].title
+             << " | " << playlist[i].artist
+             << " | " << playlist[i].duration << endl;
+    }
+}
+
+int search_song(const string& title) {
+    for (int i = 0; i < song_count; i++) {
+        if (playlist[i].title == title) return i;
+    }
+    return -1;
+}
+
+void handle_delete_song() {
+    if (song_count == 0) {
+        cout << "\nPlaylist is empty.\n";
+        return;
+    }
+
+    string title;
+    cout << "\n--- Delete Song ---\n";
+    cout << "Enter exact title: ";
+    getline(cin, title);
+
+    int index = search_song(title);
+    if (index == -1) {
+        cout << "\nSong not found.\n";
+        return;
+    }
+
+    for (int i = index; i < song_count - 1; i++)
+        playlist[i] = playlist[i + 1];
+
+    song_count--;
+    if (current_track >= song_count && song_count > 0)
+        current_track = song_count - 1;
+
+    cout << "\nSong deleted.\n";
+}
+
+void handle_select_song() {
+    string title;
+    cout << "\n--- Search Song ---\n";
+    cout << "Enter exact title: ";
+    getline(cin, title);
+
+    int index = search_song(title);
+    if (index == -1) {
+        cout << "\nSong not found.\n";
+        return;
+    }
+
+    current_track = index;
+    cout << "\nNow Selected:\n";
+    cout << playlist[index].title << " | "
+         << playlist[index].artist << " | "
+         << playlist[index].duration << endl;
+}
+
+ main_menu() {
+    string choice;
+    do {
+        cout << "\n           Basic OPM Playlist Manager        \n";
+        cout << "=============================================\n";
+        if (song_count > 0) {
+            cout << "Now Playing: "
+                 << playlist[current_track].title
+                 << " by " << playlist[current_track].artist
+                 << " (" << playlist[current_track].duration << ")\n";
+        } else {
+            cout << "Playlist is empty.\n";
+        }
+        cout << "=============================================\n";
+
+        cout << "1. Next Song\n2. Previous Song\n3. Select Song\n";
+        cout << "4. Show Playlist\n5. Delete Song\n6. Exit\n";
+        cout << "Enter choice: ";
+
+        getline(cin, choice);
+        int c = stoi(choice);
+
+        switch (c) {
+            case 1:
+                if (song_count > 0)
+                    current_track = (current_track + 1) % song_count;
+                break;
+            case 2:
+                if (song_count > 0)
+                    current_track = (current_track - 1 + song_count) % song_count;
+                break;
+            case 3:
+                handle_select_song();
+                break;
+            case 4:
+                display_playlist();
+                break;
+            case 5:
+                handle_delete_song();
+                break;
+            case 6:
+                cout << "\nGoodbye!\n";
+                return;
+            default:
+                cout << "\nInvalid choice.\n";
+        }
+    } while (true);
+}
+
+int main() {
+    main_menu();
+    return 0;
+}
