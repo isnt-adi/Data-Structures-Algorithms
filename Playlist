@@ -114,6 +114,13 @@ void handle_add_song() {
     cout << "\n[SUCCESS] '" << title << "' added to playlist. \n";
 }
 
+//Clear Playlist
+void clear_playlist() {
+    song_count = 0;
+    current_track = 0;
+    cout << "\n<<         Playlist has been cleared.        >>\n";
+}
+
 //INTERFACE
 void main_menu() {
     string choice;
@@ -125,8 +132,8 @@ void main_menu() {
         cout <<"|=============================================|\n";
         cout <<"|    1. Next Song          5. Add Song        |\n";
         cout <<"|    2. Previous Song      6. Delete Song     |\n";
-        cout <<"|    3. Select Song        7. Exit            |\n";
-        cout <<"|    4. Show Playlist                         |\n";
+        cout <<"|    3. Select Song        7. Clear Playlist  |\n";
+        cout <<"|    4. Show Playlist      8. Exit            |\n";
         cout <<"|_____________________________________________|\n";
         if (song_count > 0) {
             cout << "\n<< ♫ Now Playing: "
@@ -134,7 +141,7 @@ void main_menu() {
                  << " by " << playlist[current_track].artist
                  << " (" << playlist[current_track].duration << ") ♫ >>\n";
         } else {
-            cout << "<<          Playlist is empty              >>\n\n    ";
+            cout << "\n<<            Playlist is empty               >>\n\n";
         }
         cout << "\nEnter choice: ";
 
@@ -170,6 +177,9 @@ void main_menu() {
                 handle_delete_song();
                 break;
             case 7:
+                clear_playlist();
+                break;
+            case 8:
                 cout << "\nGoodbye!\n";
                 return;
             default:
