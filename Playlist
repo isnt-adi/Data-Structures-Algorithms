@@ -94,7 +94,7 @@ void handle_add_song() {
     getline(cin, title);
     cout << "Enter Artist: ";
     getline(cin, artist);
-    cout << "Eter Duration (e.g.: 3:45):";
+    cout << "Enter Duration (e.g.: 3:45):";
     getline(cin, duration);
     
     playlist[song_count] = {title, artist, duration};
