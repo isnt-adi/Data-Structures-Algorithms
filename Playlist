@@ -2,12 +2,14 @@
 #include <string>
 using namespace std;
 
+//Custom Data Typeee
 struct Song {
     string title;
     string artist;
     string duration;
 };
 
+//Initial Values
 const int MAX_SIZE = 20;
 Song playlist[MAX_SIZE] = {
 {"Mundo", "Cup of Joe", "4:25"},
@@ -15,11 +17,12 @@ Song playlist[MAX_SIZE] = {
 {"Leonora", "Sugarcane", "4:05"},
 {"Burnout", "Sugarfree", "4:15"},
 {"Same Ground", "Kitchie Nadal", "4:00"}
-
 };
+
 int song_count = 5;
 int current_track = 0;
 
+//Display Playlist (Traversal Algo)
 void display_playlist() {
     cout << "\n--- Current Playlist (" << song_count << " songs) ---\n";
     for (int i = 0; i < song_count; i++) {
@@ -29,6 +32,7 @@ void display_playlist() {
     }
 }
 
+//Search Song (Search Algo)
 int search_song(const string& title) {
     for (int i = 0; i < song_count; i++) {
         if (playlist[i].title == title) return i;
@@ -36,6 +40,7 @@ int search_song(const string& title) {
     return -1;
 }
 
+//Delete Song (Deletion Algo)
 void handle_delete_song() {
     if (song_count == 0) {
         cout << "\nPlaylist is empty.\n";
@@ -46,16 +51,16 @@ void handle_delete_song() {
     cout << "\n--- Delete Song ---\n";
     cout << "Enter exact title: ";
     getline(cin, title);
-
+    //Call Search Song
     int index = search_song(title);
     if (index == -1) {
         cout << "\nSong not found.\n";
         return;
     }
-
+    //Shift to the left
     for (int i = index; i < song_count - 1; i++)
         playlist[i] = playlist[i + 1];
-
+    //Delete Last Index
     song_count--;
     if (current_track >= song_count && song_count > 0)
         current_track = song_count - 1;
@@ -63,6 +68,7 @@ void handle_delete_song() {
     cout << "\nSong deleted.\n";
 }
 
+//Select Song (Search Algo)
 void handle_select_song() {
     string title;
     cout << "\n--- Search Song ---\n";
@@ -82,6 +88,7 @@ void handle_select_song() {
          << playlist[index].duration << endl;
 }
 
+//Add Song (No Insertion Algo - Adds only at the End)
 void handle_add_song() {
     if (song_count >= MAX_SIZE){
         cout << "\nPlaylist is full. Cannot add more songs.\n";
@@ -103,6 +110,7 @@ void handle_add_song() {
     cout << "\n[SUCCESS] '" << title << "' added to playlist. \n";
 }
 
+//INTERFACE
 void main_menu() {
     string choice;
 
@@ -163,7 +171,7 @@ void main_menu() {
     } while (true);
 }
 
-
+//ACTUAL MAIN
 int main() {
     main_menu();
     return 0;
