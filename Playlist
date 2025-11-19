@@ -10,13 +10,12 @@ struct Song {
 
 const int MAX_SIZE = 10;
 Song playlist[MAX_SIZE] = {
-    {"Susundan", "Cup of Joe", "4:30"},
-    {"Saan", "Maki", "3:45"},
-    {"Sirena", "Gloc-9 ft. Ebe Dancel", "4:50"},
-    {"Pasko Na Sinta Ko", "Sugarcane", "3:58"},
-    {"Huwag Na Huwag Mong Sasabihin", "Kitchie Nadal", "4:28"},
-    {"Tulog Na", "Sugarfree", "3:20"},
-    {"Tatsulok", "Gloc-9", "4:10"}
+{"Mundo", "Cup of Joe", "4:25"},
+{"Upuan", "Gloc-9", "5:10"},
+{"Leonora", "Sugarcane", "4:05"},
+{"Burnout", "Sugarfree", "4:15"},
+{"Same Ground", "Kitchie Nadal", "4:00"}
+
 };
 int song_count = 7;
 int current_track = 0;
@@ -83,6 +82,27 @@ void handle_select_song() {
          << playlist[index].duration << endl;
 }
 
+void handle_add_song() {
+    if (song_count >= MAX_SIZE){
+        cout << "\nPlaylist is full. Cannot add more songs.\n";
+        return;
+    }
+    string title, artist, duration;
+    
+    cout << "\n--- Add New Song --- \n";
+    cout << "Enter Title: ";
+    getline(cin, title);
+    cout << "Enter Artist: ";
+    getline(cin, artist);
+    cout << "Eter Duration (e.g.: 3:45):";
+    getline(cin, duration);
+    
+    playlist[song_count] = {title, artist, duration};
+    song_count++;
+    
+    cout << "\n[SUCCESS] '" << title << "' added to playlist. \n";
+}
+
 void main_menu() {
     string choice;
 
@@ -104,7 +124,14 @@ void main_menu() {
         cout << "Enter choice: ";
 
         getline(cin, choice);
-        int c = stoi(choice);
+
+        int c;
+        try {
+            c = stoi(choice);
+        } catch (...) {
+            cout << "\nInvalid input. Please enter a number only.\n";
+            continue;
+        }
 
         switch (c) {
             case 1:
@@ -135,6 +162,7 @@ void main_menu() {
         }
     } while (true);
 }
+
 
 int main() {
     main_menu();
