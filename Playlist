@@ -116,6 +116,7 @@ void main_menu() {
 
     do {
         cout << "\n           Basic OPM Playlist Manager        \n";
+        cout << "                (Maximum 20 Songs)           \n"
         cout << "=============================================\n";
         if (song_count > 0) {
             cout << "Now Playing: "
@@ -126,7 +127,6 @@ void main_menu() {
             cout << "Playlist is empty.\n";
         }
         cout << "=============================================\n";
-
         cout << "1. Next Song\n2. Previous Song\n3. Select Song\n";
         cout << "4. Show Playlist\n5. Add Song\n6. Delete Song\n7. Exit\n";
         cout << "Enter choice: ";
