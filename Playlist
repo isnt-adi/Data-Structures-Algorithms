@@ -33,7 +33,7 @@ void display_playlist() {
              << " | " << playlist[i].artist
              << " | " << playlist[i].duration <<endl;
     }
-    cout <<"|---------------------------------------------|\n";
+    cout <<"|----------------------------------------------|\n";
 }
 
 //Search Song (Search Algo)
