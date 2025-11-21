@@ -16,7 +16,7 @@ int current_track = 0;
 
 //Pre-filled Playlist
 Song playlist[MAX_SIZE] = {
-{"Mundo", "Cup of Joe", "4:25"},
+{"Multo", "Cup of Joe", "4:25"},
 {"Upuan", "Gloc-9", "5:10"},
 {"Leonora", "Sugarcane", "4:05"},
 {"Burnout", "Sugarfree", "4:15"},
